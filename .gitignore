@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# Generated image
+*.pgm
+
+# VSCode
+*.vscode

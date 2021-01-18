@@ -4,6 +4,13 @@
 #include <stdio.h>
 #include <chrono>
 #include "imageProcessing.h"
+#ifdef WINDOWS
+#include <direct.h>
+#define GetCurrentDir _getcwd
+#else
+#include <unistd.h>
+#define GetCurrentDir getcwd
+#endif
 
 using namespace std;
 using namespace chrono;
@@ -54,29 +61,31 @@ PgmImage readFile(string path)
     return PgmImage(formatFlag, widthI, heightI, maxPixelValueI, pixels);
 }
 
-void pickFilter(int filterNumber)
+PgmImage pickFilter(PgmImage inputImage, int &filterNumber)
 {
+
     switch (filterNumber)
     {
-    case 1: 
-            break;
-    case 2: break;
-    case 3: break;
-    case 4: break;
-    case 5: break;
-    case 6: break;
-    case 7: break;
-    case 8: break;
-    case 9: break;
-    default:
-        break;
+    case 1: return edgeDetect1(inputImage);
+    case 2: return edgeDetect2(inputImage);
+    case 3: return edgeDetect3(inputImage);
+    case 4: return sharpen(inputImage);
+    case 5: return boxBlur(inputImage);
+    case 6: return gaussian3(inputImage);
+    case 7: return gaussian5(inputImage);
+    case 8: return emboss(inputImage);
+    case 9: return invert(inputImage);
     }
+
+    return PgmImage();
 }
 
 int main(void)
 {
-    string imageName, filter;
     int filterNumber = 5;
+    char buff[FILENAME_MAX];
+    GetCurrentDir(buff, FILENAME_MAX);
+    string current_working_dir(buff), imageName, filter;
 
     while (imageName != "stop")
     {
@@ -84,7 +93,7 @@ int main(void)
         getline(cin, imageName);
         if (imageName == "stop")
             break;
-        PgmImage inputImage = readFile("C:/Users/rober/Documents/FER/5.semestar/PIK/Projekt/Kod/images/" + imageName);
+        PgmImage inputImage = readFile(current_working_dir + "/images/" + imageName);
         if (inputImage.formatFlag == "")
             continue;
         cout << "Available filters:\n1. Edge detection 1\n2. Edge detection 2\n3. Edge detection 3\n";
@@ -94,17 +103,21 @@ int main(void)
             cout << "Choose a filter by typing its number: ";
             getline(cin, filter);
             stringstream ssf(filter);
-            if(ssf >> filterNumber) {
-                if(filterNumber < 1 || filterNumber > 9) continue;
+            if (ssf >> filterNumber)
+            {
+                if (filterNumber < 1 || filterNumber > 9)
+                    continue;
                 break;
-            } else {
+            }
+            else
+            {
                 continue;
             }
         }
-        pickFilter(filterNumber);
+
         steady_clock::time_point time = steady_clock::now();
-        PgmImage resultImage = convolve(inputImage);
-        resultImage.printToFile("C:/Users/rober/Documents/FER/5.semestar/PIK/Projekt/Kod/result.pgm");
+        PgmImage resultImage = pickFilter(inputImage, filterNumber);
+        resultImage.printToFile(current_working_dir + "/result.pgm");
         cout << "Time elapsed: " << duration_cast<nanoseconds>(steady_clock::now() - time).count() << " [ns]" << endl;
     }
 
