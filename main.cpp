@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <chrono>
 #include "imageProcessing.h"
+// import needed for knowing the workspace path
 #ifdef WINDOWS
 #include <direct.h>
 #define GetCurrentDir _getcwd
@@ -61,32 +62,15 @@ PgmImage readFile(string path)
     return PgmImage(formatFlag, widthI, heightI, maxPixelValueI, pixels);
 }
 
-PgmImage pickFilter(PgmImage inputImage, int &filterNumber)
-{
-
-    switch (filterNumber)
-    {
-    case 1: return edgeDetect1(inputImage);
-    case 2: return edgeDetect2(inputImage);
-    case 3: return edgeDetect3(inputImage);
-    case 4: return sharpen(inputImage);
-    case 5: return boxBlur(inputImage);
-    case 6: return gaussian3(inputImage);
-    case 7: return gaussian5(inputImage);
-    case 8: return emboss(inputImage);
-    case 9: return invert(inputImage);
-    }
-
-    return PgmImage();
-}
-
 int main(void)
 {
     int filterNumber = 5;
+    // code needed to know the workspace path on any computer, not just mine
     char buff[FILENAME_MAX];
     GetCurrentDir(buff, FILENAME_MAX);
     string current_working_dir(buff), imageName, filter;
 
+    // a simple application with input validation for avoiding potential errors 
     while (imageName != "stop")
     {
         cout << "Write the exact name of the image that you want to work with, or write stop to terminate the program: ";
@@ -115,10 +99,12 @@ int main(void)
             }
         }
 
+        // we measure the time needed for matrix multiplication
         steady_clock::time_point time = steady_clock::now();
         PgmImage resultImage = pickFilter(inputImage, filterNumber);
-        resultImage.printToFile(current_working_dir + "/result.pgm");
         cout << "Time elapsed: " << duration_cast<nanoseconds>(steady_clock::now() - time).count() << " [ns]" << endl;
+        // printing the image to a file
+        resultImage.printToFile(current_working_dir + "/result.pgm");
     }
 
     return 0;
