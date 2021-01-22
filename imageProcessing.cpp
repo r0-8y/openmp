@@ -41,12 +41,15 @@ const vector<float> gaussian5K({
 PgmImage convolute(PgmImage &resultImage, vector<float> kernel)
 {
     // temporary vector for resulting matrix because the width and height of the image change
-    vector<float> resultPixels;
+    vector<float> resultPixels = resultImage.pixels;
     // accumulator for saving the final pixel value
-    float acc;
+    float acc = 0;
     // checking the kernel size for correct looping
     int size = kernel.size() == 9 ? 3 : 5;
 
+    double begin = omp_get_wtime();
+//#pragma omp target teams distribute parallel for firstprivate(acc, kernel) collapse(2) schedule(static, 1)
+//#pragma omp parallel for firstprivate(acc, kernel)
     for (int i = 0; i < resultImage.height - size + 1; i++)
     {
         for (int j = 0; j < resultImage.width - size + 1; j++)
@@ -62,9 +65,12 @@ PgmImage convolute(PgmImage &resultImage, vector<float> kernel)
                     acc += kernel[k * size + l] * resultImage.pixels[i * resultImage.width + k * resultImage.width + l + j];
                 }
             }
-            resultPixels.push_back(acc);
+            resultPixels[i * (resultImage.width - size + 1) + j] = acc;
         }
     }
+
+    cout << "Time elapsed: " << omp_get_wtime() - begin << " [s]" << endl;
+
     // update the result image values
     resultImage.pixels = resultPixels;
     // we need to shrink the image by (size - 1) because of convolution
@@ -78,6 +84,7 @@ PgmImage convolute(PgmImage &resultImage, vector<float> kernel)
 // the "&" is there to pass the image by refference and not make a new copy to save space
 PgmImage invert(PgmImage &resultImage)
 {
+#pragma omp parallel for collapse(2)
     for (int i = 0; i < resultImage.height; i++)
     {
         for (int j = 0; j < resultImage.width; j++)

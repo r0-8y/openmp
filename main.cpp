@@ -75,6 +75,7 @@ int main(void)
         getline(cin, imageName);
         if (imageName == "stop")
             break;
+        cout << "Reading image data..." << endl;
         PgmImage inputImage = readFile(current_working_dir + "/images/" + imageName);
         if (inputImage.formatFlag == "")
             continue;
@@ -98,10 +99,11 @@ int main(void)
         }
 
         // we measure the time needed for matrix multiplication
-        double begin = omp_get_wtime();
+        //double begin = omp_get_wtime();
         PgmImage resultImage = pickFilter(inputImage, filterNumber);
         // printing the image to a file
-        cout << "Time elapsed: " << omp_get_wtime() - begin << " [s]" << endl;
+        //cout << "Time elapsed: " << omp_get_wtime() - begin << " [s]" << endl;
+        cout << "Printing the result..." << endl;
         resultImage.printToFile(current_working_dir + "/result.pgm");
     }
 
