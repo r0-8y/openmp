@@ -1,0 +1,137 @@
+Optimization: none
+Image: fractal_tree.ascii.pgm
+Description: These tests show the time needed for the image to be filtered AND written to a text file as a result. 
+
+1.
+Write the exact name of the image that you want to work with, or write stop to terminate the program: fractal_tree.ascii.pgm
+Available filters:
+1. Edge detection 1
+2. Edge detection 2
+3. Edge detection 3
+4. Sharpen
+5. Box blur
+6. Gaussian blur 3x3
+7. Gaussian blur 5x5
+8. Emboss
+9. Invert
+Choose a filter by typing its number: 1
+Time elapsed: 2.384 [s]
+
+2.
+Write the exact name of the image that you want to work with, or write stop to terminate the program: fractal_tree.ascii.pgm
+Available filters:
+1. Edge detection 1
+2. Edge detection 2
+3. Edge detection 3
+4. Sharpen
+5. Box blur
+6. Gaussian blur 3x3
+7. Gaussian blur 5x5
+8. Emboss
+9. Invert
+Choose a filter by typing its number: 2
+Time elapsed: 2.413 [s]
+
+3.
+Write the exact name of the image that you want to work with, or write stop to terminate the program: fractal_tree.ascii.pgm
+Available filters:
+1. Edge detection 1
+2. Edge detection 2
+3. Edge detection 3
+4. Sharpen
+5. Box blur
+6. Gaussian blur 3x3
+7. Gaussian blur 5x5
+8. Emboss
+9. Invert
+Choose a filter by typing its number: 3
+Time elapsed: 2.445 [s]
+
+4.
+Write the exact name of the image that you want to work with, or write stop to terminate the program: fractal_tree.ascii.pgm
+Available filters:
+1. Edge detection 1
+2. Edge detection 2
+3. Edge detection 3
+4. Sharpen
+5. Box blur
+6. Gaussian blur 3x3
+7. Gaussian blur 5x5
+8. Emboss
+9. Invert
+Choose a filter by typing its number: 4
+Time elapsed: 2.414 [s]
+
+5.
+Available filters:
+1. Edge detection 1
+2. Edge detection 2
+3. Edge detection 3
+4. Sharpen
+5. Box blur
+6. Gaussian blur 3x3
+7. Gaussian blur 5x5
+8. Emboss
+9. Invert
+Choose a filter by typing its number: 5
+Time elapsed: 3.616 [s]
+
+6.
+Write the exact name of the image that you want to work with, or write stop to terminate the program: fractal_tree.ascii.pgm
+Available filters:
+1. Edge detection 1
+2. Edge detection 2
+3. Edge detection 3
+4. Sharpen
+5. Box blur
+6. Gaussian blur 3x3
+7. Gaussian blur 5x5
+8. Emboss
+9. Invert
+Choose a filter by typing its number: 6
+Time elapsed: 3.667 [s]
+
+7.
+Write the exact name of the image that you want to work with, or write stop to terminate the program: fractal_tree.ascii.pgm
+Available filters:
+1. Edge detection 1
+2. Edge detection 2
+3. Edge detection 3
+4. Sharpen
+5. Box blur
+6. Gaussian blur 3x3
+7. Gaussian blur 5x5
+8. Emboss
+9. Invert
+Choose a filter by typing its number: 7
+Time elapsed: 4.138 [s]
+
+8.
+Write the exact name of the image that you want to work with, or write stop to terminate the program: fractal_tree.ascii.pgm
+Available filters:
+1. Edge detection 1
+2. Edge detection 2
+3. Edge detection 3
+4. Sharpen
+5. Box blur
+6. Gaussian blur 3x3
+7. Gaussian blur 5x5
+8. Emboss
+9. Invert
+Choose a filter by typing its number: 8
+Time elapsed: 2.427 [s]
+
+9.
+Write the exact name of the image that you want to work with, or write stop to terminate the program: fractal_tree.ascii.pgm
+Available filters:
+1. Edge detection 1
+2. Edge detection 2
+3. Edge detection 3
+4. Sharpen
+5. Box blur
+6. Gaussian blur 3x3
+7. Gaussian blur 5x5
+8. Emboss
+9. Invert
+Choose a filter by typing its number: 9
+Time elapsed: 2.277 [s]

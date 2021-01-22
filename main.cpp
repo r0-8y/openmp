@@ -2,7 +2,6 @@
 #include <vector>
 #include <sstream>
 #include <stdio.h>
-#include <chrono>
 #include "imageProcessing.h"
 // import needed for knowing the workspace path
 #ifdef WINDOWS
@@ -14,7 +13,6 @@
 #endif
 
 using namespace std;
-using namespace chrono;
 
 PgmImage readFile(string path)
 {
@@ -100,10 +98,10 @@ int main(void)
         }
 
         // we measure the time needed for matrix multiplication
-        steady_clock::time_point time = steady_clock::now();
+        double begin = omp_get_wtime();
         PgmImage resultImage = pickFilter(inputImage, filterNumber);
-        cout << "Time elapsed: " << duration_cast<nanoseconds>(steady_clock::now() - time).count() << " [ns]" << endl;
         // printing the image to a file
+        cout << "Time elapsed: " << omp_get_wtime() - begin << " [s]" << endl;
         resultImage.printToFile(current_working_dir + "/result.pgm");
     }
 

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <omp.h>
 using namespace std;
 
 class PgmImage
