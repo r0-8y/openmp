@@ -1,6 +1,7 @@
 # Image processing optimization
 
 This is project is a part of my Parallelism and Concurency Course, University of Zagreb, FER. It takes a ".pgm" image and filters it in various ways.
+
 ![alt text](/images/fractal_tree.png)
 
 # Installation
