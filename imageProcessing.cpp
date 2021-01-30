@@ -48,8 +48,8 @@ PgmImage convolute(PgmImage &resultImage, vector<float> kernel)
     int size = kernel.size() == 9 ? 3 : 5;
 
     double begin = omp_get_wtime();
-//#pragma omp target teams distribute parallel for firstprivate(acc, kernel) collapse(2) schedule(static, 1)
-//#pragma omp parallel for firstprivate(acc, kernel)
+
+#pragma omp parallel for firstprivate(acc, kernel)
     for (int i = 0; i < resultImage.height - size + 1; i++)
     {
         for (int j = 0; j < resultImage.width - size + 1; j++)
